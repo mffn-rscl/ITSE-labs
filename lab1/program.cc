@@ -3,7 +3,8 @@
 #include <string>
 #include <algorithm>
 #include <cassert>
- const unsigned int option = (19%5) + 5; 
+const unsigned int option = (19%5) + 5; 
+
 int decimal_solution(std::string solution)
 {
     int bin_num = 0;
