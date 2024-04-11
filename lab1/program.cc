@@ -5,31 +5,32 @@
 #include <cassert>
 const unsigned int option = (19%5) + 5; 
 
-int decimal_solution(std::string solution)
-{
+int decimal_solution(std::string solution) {
     int bin_num = 0;
-    for (int i = 0; i < option; i++)
-        bin_num += ((static_cast<unsigned int>(solution[option - i - 1]) - 48) * pow(2, i));
+    int option = solution.length();
+
+    for (int i = 0; i < option; i++)bin_num += ((solution[option - i - 1] - '0') * pow(2, i)); 
+
     return bin_num;
 }
 
-std::string binary_solution(std::string a, std::string b)
-{
-    int bin_num = decimal_solution(a) + decimal_solution(b);
-    std::string solution;
-
-    while (bin_num != 0)
-    {
-        solution += (bin_num % 2) + '0';
-        bin_num /= 2;
+std::string binary_summator(std::string a, std::string b) {
+    std::string binary_sum = "";
+    int sum = 0, len = a.length() - 1, remainder = 0;
+    while (len >= 0 || remainder == 1) {
+        sum = (len >= 0 ? a[len] - '0' : 0) + (len >= 0 ? b[len] - '0' : 0) + remainder;
+        remainder = sum / 2;
+        sum %= 2;
+        binary_sum = std::to_string(sum) + binary_sum;
+        len--;
     }
-    std::reverse(solution.begin(), solution.end());
-    return solution;
+    return binary_sum;
 }
+
 
 int main()
 {
-    std::string a, b;
+    std::string a, b,solution;
     std::cout << "  Завдання: Написати програму яка виконує додавання двох чисел введених" << std::endl;
     std::cout << "з клавіатури у бінарному вигляді, а виводить на екран результат додавання" << std::endl;
     std::cout << " (у бінарному вигляді) та введені числа і їх суму у десятковій формі.\n" << std::endl;
@@ -41,14 +42,11 @@ int main()
     std::cout << "Введіть другий доданок у бінарному вигляді: ";
     std::getline(std::cin, b);
     assert(b.length() == option);
-
-    std::cout << std::endl;
+    solution = binary_summator(a, b);
     std::cout << "Сума введених чисел у бінарному вигляді:";
-    std::cout << a << " + " << b << " = " << binary_solution(a, b) << std::endl;
+    std::cout << solution << std::endl;
 
-    std::cout << std::endl;
     std::cout << "Сума введених чисел у десятковому вигляді:";
-    std::cout << decimal_solution(a) << " + " << decimal_solution(b) << " = " << decimal_solution(b) + decimal_solution(a) << std::endl;
-
+    std::cout << decimal_solution(solution) << std::endl;
     return 0;
 }
