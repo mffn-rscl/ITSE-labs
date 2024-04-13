@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/user/files/labs/ITSE-labs/lab1",
-      "program": "/home/user/files/labs/ITSE-labs/lab1/build/Debug/outDebug",
+      "cwd": "/home/user/files/labs/ITSE-labs/lab2.1",
+      "program": "/home/user/files/labs/ITSE-labs/lab2.1/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
