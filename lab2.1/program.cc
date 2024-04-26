@@ -24,27 +24,17 @@ double from_binary_to_frac(std::string bin_num)
     return decimal/2.0;
 }
 
+
 std::string from_dir_to_add(const std::string &bin_num)
 {
-    std::string solution(32, '0'); 
-    int pos = bin_num.length() - 1;
-    int carry =1;
-    while (pos >= 0 && bin_num[pos] != '1') pos--;
-
-    for (int i = 31; i >= 0; i--)
+    std::string sol=bin_num;
+    if(sol[0] == '1')
     {
-        int sum = (bin_num[i] - '0') + carry;
-        solution[i] = (sum % 2 == 0) ? '0' : '1'; 
-        carry = sum / 2; 
+        int i = 31;
+        while(i -- > 1 && sol[i] == '0');
+        for(;i-->1;) sol[i]= sol[i] == '1' ? '0' : '1';
     }
-
-    if (carry)solution.insert(0, "1"); 
-
-    if (pos == -1) return solution;
-
-    for (int i = pos; i < 32; i++) solution[i] = bin_num[i];
-
-    return solution;
+    return sol;
 }
 
 
@@ -68,9 +58,8 @@ int main()
         break;
     
     case 'b':
-        std::cout << "\nIn: ";
         getline(std::cin,str);
-        std::cout << "\nрезультат: " << from_dir_to_add(str) << std::endl;
+        std::cout  << from_dir_to_add(str) << std::endl;
 
         break;
     
